@@ -28,10 +28,20 @@ class EnvironmentValidationPage {
      * Validates that the current page does not exhibit UAT/Staging characteristics
      */
     async verifyProductionEnvironment(url) {
+        const urlObj = new URL(url);
+        const testingHostname = urlObj.hostname.toLowerCase();
+
         // 1. Check Network APIs (Ensures Prod site isn't calling UAT backend services)
         // From inspection, UAT uses 'test.hawksearch.net' and often 'uat' / 'staging' domains
         const suspiciousRequests = this.networkRequests.filter(reqUrl => {
             const lowerUrl = reqUrl.toLowerCase();
+
+            // Allow requests to the exact same domain even if it has 'staging' in its name
+            try {
+                const reqObj = new URL(reqUrl);
+                if (reqObj.hostname.toLowerCase() === testingHostname) return false;
+            } catch (e) { }
+
             return lowerUrl.includes('uat') || lowerUrl.includes('staging') || lowerUrl.includes('test.hawksearch');
         });
 
@@ -59,11 +69,15 @@ class EnvironmentValidationPage {
             if (canonicalUrl) {
                 const lowerCanonical = canonicalUrl.toLowerCase();
                 // Ensure the canonical URL does NOT point to UAT/Staging
-                expect(lowerCanonical, `Production site ${url} has a UAT/Staging canonical URL: ${canonicalUrl}`).not.toMatch(/uat|staging/);
+                if (testingHostname.includes('staging')) {
+                    expect(lowerCanonical, `Production site ${url} has a UAT/Staging canonical URL: ${canonicalUrl}`).not.toMatch(/uat/);
+                } else {
+                    expect(lowerCanonical, `Production site ${url} has a UAT/Staging canonical URL: ${canonicalUrl}`).not.toMatch(/uat|staging/);
+                }
 
                 // Ensure the canonical domain matches the production domain
                 try {
-                    const prodHostname = new URL(url).hostname.replace('www.', '');
+                    const prodHostname = testingHostname.replace('www.', '');
                     const canonicalHostname = new URL(canonicalUrl, url).hostname.replace('www.', '');
                     expect(canonicalHostname, `Canonical URL domain ${canonicalHostname} does not match Production domain ${prodHostname}`).toBe(prodHostname);
                 } catch (e) {

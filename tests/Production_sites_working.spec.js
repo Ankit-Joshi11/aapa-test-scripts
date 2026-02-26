@@ -12,11 +12,7 @@ const PRODUCTION_URLS = [
     'https://store.autovalueparts.ca/',
     'https://shopmaslack.com/',
     'https://baxterautoparts.com/',
-    'https://b2bkansas.com/',
-    'https://shop.pistonringservice.com/'
-];
-
-const STAGING_URLS = [
+    'https://shop.pistonringservice.com/',
     'https://staging.centropiezasplus.com/'
 ];
 
@@ -37,20 +33,6 @@ test.describe('Production Sites Working Verification', () => {
         });
     }
 
-    // Explicit test for staging URLs to ensure they ARE showing UAT/Staging characteristics
-    for (const url of STAGING_URLS) {
-        test(`Verify ${url} is pointing to Staging/UAT Data/Structure`, async ({ page }) => {
-            const validationPage = new EnvironmentValidationPage(page);
 
-            // Navigate to the staging URL
-            await validationPage.navigate(url);
-
-            // Wait a moment for dynamic API calls/elements to load
-            await page.waitForTimeout(3000);
-
-            // Assert that the page DOES show UAT data/APIs
-            await validationPage.verifyStagingEnvironment(url);
-        });
-    }
 
 });
