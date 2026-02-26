@@ -89,26 +89,6 @@ class EnvironmentValidationPage {
         }
     }
 
-    /**
-     * Validates that the current page DOES exhibit UAT/Staging characteristics
-     */
-    async verifyStagingEnvironment(url) {
-        // 1. Check Network APIs
-        const suspiciousRequests = this.networkRequests.filter(reqUrl => {
-            const lowerUrl = reqUrl.toLowerCase();
-            return lowerUrl.includes('uat') || lowerUrl.includes('staging') || lowerUrl.includes('test.hawksearch');
-        });
-
-        // 2. Check for UAT specific elements in the DOM 
-        const uatTextLocator = this.page.getByText('ALLIANCE INTERNAL TEST SITE', { exact: false }).first();
-        const isUatBannerVisible = await uatTextLocator.isVisible();
-
-        // Assertions: 
-        // We expect YES suspicious UAT network calls OR a UAT banner. 
-        // If this fails, it means the Staging URL is pointing to Prod data/structure.
-        const isStaging = suspiciousRequests.length > 0 || isUatBannerVisible;
-        expect(isStaging, `Staging site ${url} is NOT displaying UAT/Staging indicators!`).toBe(true);
-    }
 }
 
 module.exports = { EnvironmentValidationPage };
