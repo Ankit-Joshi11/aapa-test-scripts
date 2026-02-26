@@ -1,4 +1,4 @@
-# Production vs. UAT Environment Validation Suite
+# Production ASG Refresh Sanity Check
 
 ## 1. Description and Purpose of the Script
 When different e-commerce production storefronts running in the ASG mode relaunches as per the regular cycle (weekly basis), they initially launches with the base image pointing to UAT DB and related configurations. After relaunch is complete, the scheduled job on individual instance redeploys those storefront sites with their domain specific configuration. But sometimes, the Production site might inadvertently remains pointing to the UAT environment  because of redeployment failure for any reason. 
