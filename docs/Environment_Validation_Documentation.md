@@ -1,12 +1,14 @@
 # Production vs. UAT Environment Validation Suite
 
 ## 1. Description and Purpose of the Script
-When deploying multiple e-commerce or informational storefronts across various domains, there is a risk that a Production URL might inadvertently connect to a User Acceptance Testing (UAT) or Staging environment. When this happens, real-world users might interact with fake data, test products, or unfinished features.
+When different e-commerce production storefronts running in the ASG mode relaunches as per the regular cycle (weekly basis), they initially launches with the base image pointing to UAT DB and related configurations. After relaunch is complete, the scheduled job on individual instance redeploys those storefront sites with their domain specific configuration. But sometimes, the Production site might inadvertently remains pointing to the UAT environment  because of redeployment failure for any reason. 
+
+This automated script aims to verify the production sites successfully redeploy or not after the ASG relaunch and pointing to their production domain or not.
 
 The purpose of this automation suite is to programmatically verify that an array of defined Production URLs are authentically pointing to Production data and structures, and are entirely detached from UAT or Staging dependencies. Conversely, it ensures that designated Staging environments genuinely exhibit test-level characteristics. 
 
 The suite comprises two main components:
-*   `scripts/EnvironmentValidationPage.js` - A Page Object Model (POM) class containing the core logic and Playwright assertions to identify environment types.
+*   `scripts/Validate-Prod-ASG-Refresh.js` - A Page Object Model (POM) class containing the core logic and Playwright assertions to identify environment types.
 *   `tests/Validate-Prod-ASG-Refresh.spec.js` - The executable Playwright test script that iterates through the provided URLs and coordinates the assertions.
 
 ---

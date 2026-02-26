@@ -1,5 +1,5 @@
 const { test } = require('@playwright/test');
-const { EnvironmentValidationPage } = require('../scripts/Production_site_validation');
+const { EnvironmentValidationPage } = require('../scripts/Validate-Prod-ASG-Refresh');
 
 const PRODUCTION_URLS = [
     'https://abcauto.com/',
