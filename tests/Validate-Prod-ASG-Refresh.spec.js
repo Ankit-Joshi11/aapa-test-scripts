@@ -1,5 +1,5 @@
 const { test } = require('@playwright/test');
-const { EnvironmentValidationPage } = require('../pages/EnvironmentValidationPage');
+const { EnvironmentValidationPage } = require('../scripts/Production_site_validation');
 
 const PRODUCTION_URLS = [
     'https://abcauto.com/',
@@ -12,6 +12,7 @@ const PRODUCTION_URLS = [
     'https://store.autovalueparts.ca/',
     'https://shopmaslack.com/',
     'https://baxterautoparts.com/',
+    'https://b2bkansas.com/',
     'https://shop.pistonringservice.com/',
     'https://staging.centropiezasplus.com/'
 ];

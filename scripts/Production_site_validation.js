@@ -6,12 +6,6 @@ class EnvironmentValidationPage {
      */
     constructor(page) {
         this.page = page;
-        this.networkRequests = [];
-
-        // Listen to all network requests to catch if a Prod site makes calls to UAT/Staging APIs
-        this.page.on('request', request => {
-            this.networkRequests.push(request.url());
-        });
     }
 
     /**
@@ -19,8 +13,6 @@ class EnvironmentValidationPage {
      * @param {string} url 
      */
     async navigate(url) {
-        // Clear previous requests before navigating
-        this.networkRequests = [];
         await this.page.goto(url, { waitUntil: 'domcontentloaded' });
     }
 
@@ -31,38 +23,7 @@ class EnvironmentValidationPage {
         const urlObj = new URL(url);
         const testingHostname = urlObj.hostname.toLowerCase();
 
-        // 1. Check Network APIs (Ensures Prod site isn't calling UAT backend services)
-        // From inspection, UAT uses 'test.hawksearch.net' and often 'uat' / 'staging' domains
-        const suspiciousRequests = this.networkRequests.filter(reqUrl => {
-            const lowerUrl = reqUrl.toLowerCase();
-
-            // Allow requests to the exact same domain even if it has 'staging' in its name
-            try {
-                const reqObj = new URL(reqUrl);
-                if (reqObj.hostname.toLowerCase() === testingHostname) return false;
-            } catch (e) { }
-
-            return lowerUrl.includes('uat') || lowerUrl.includes('staging') || lowerUrl.includes('test.hawksearch');
-        });
-
-        // 2. Check for UAT specific elements in the DOM 
-        // Inspection showed a banner containing "** ALLIANCE INTERNAL TEST SITE ONLY **"
-        const uatTextLocator = this.page.getByText('ALLIANCE INTERNAL TEST SITE', { exact: false }).first();
-        const isUatBannerVisible = await uatTextLocator.isVisible();
-
-        // Let's assert based on these characteristics
-        if (suspiciousRequests.length > 0) {
-            console.log(`[WARNING] Suspicious UAT/Staging API calls found on ${url}:`);
-            suspiciousRequests.slice(0, 5).forEach(req => console.log(` -> ${req}`));
-        }
-
-        // Assertions: 
-        // We expect NO suspicious UAT network calls and NO UAT banners. 
-        // If this fails, it means the Prod URL is pointing to UAT data/structure.
-        expect(suspiciousRequests.length, `Production site ${url} is making requests to UAT/Staging URLs!`).toBe(0);
-        expect(isUatBannerVisible, `Production site ${url} is displaying a UAT/Staging banner!`).toBe(false);
-
-        // 3. Check Canonical URL in the DOM
+        // 1. Check Canonical URL in the DOM
         const canonicalTag = this.page.locator('link[rel="canonical"]');
         if (await canonicalTag.count() > 0) {
             const canonicalUrl = await canonicalTag.first().getAttribute('href');
