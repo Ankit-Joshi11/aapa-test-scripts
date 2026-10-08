@@ -1,0 +1,41 @@
+{
+  "name": "production-sanity-test-scripts",
+  "version": "1.0.0",
+  "description": "Hawk Search Sanity Test Suite across 5 Production Auto Parts Platforms",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test tests/specs/hawk-search.spec.js --project=chromium",
+    "test:hawk": "playwright test tests/specs/hawk-search.spec.js --project=chromium",
+    "test:abcauto": "SITE=abcauto playwright test tests/specs/hawk-search.spec.js --project=chromium",
+    "test:eapw": "SITE=eapw playwright test tests/specs/hawk-search.spec.js --project=chromium",
+    "test:bumper": "SITE=bumpertobumper playwright test tests/specs/hawk-search.spec.js --project=chromium",
+    "test:autovalue": "SITE=autovalue playwright test tests/specs/hawk-search.spec.js --project=chromium",
+    "test:arnold": "SITE=arnoldmotors playwright test tests/specs/hawk-search.spec.js --project=chromium",
+    "test:staging": "playwright test tests/specs/hawk-search-staging.spec.js --project=chromium",
+    "test:staging:brand": "playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g \"Brand Search\"",
+    "test:staging:category": "playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g \"Category Search\"",
+    "test:staging:keyword": "playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g \"Keyword Search\"",
+    "test:staging:sitemap": "playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g \"Site Map Search\"",
+    "test:brand": "playwright test tests/specs/hawk-search.spec.js --project=chromium -g \"Brand Search\"",
+    "test:category": "playwright test tests/specs/hawk-search.spec.js --project=chromium -g \"Category Search\"",
+    "test:keyword": "playwright test tests/specs/hawk-search.spec.js --project=chromium -g \"Keyword Search\"",
+    "test:sitemap": "playwright test tests/specs/hawk-search.spec.js --project=chromium -g \"Site Map Search\"",
+    "test:all-browsers": "playwright test tests/specs/hawk-search.spec.js",
+    "test:report": "open reports/hawk-search-dashboard.html",
+    "test:dashboard": "open reports/hawk-search-dashboard.html"
+  },
+  "keywords": [
+    "playwright",
+    "hawksearch",
+    "e-commerce",
+    "automation",
+    "sanity-testing"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^26.6.4"
+  }
+}
