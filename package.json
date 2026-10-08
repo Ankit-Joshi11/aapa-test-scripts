@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:hawk": "cd hawk-search-sanity && npm test",
+    "test:hawk:staging": "cd hawk-search-sanity && npm run test:staging",
+    "test:asg-refresh": "npx playwright test prod-asg-refresh/tests/Validate-Prod-ASG-Refresh.spec.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
