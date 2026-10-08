@@ -160,104 +160,107 @@ The framework generates a custom, self-contained **Executive Test Dashboard** af
 
 ---
 
-## 💻 8. Command Cheatsheet
+## 💻 8. Comprehensive Command Cheatsheet
 
-### Run by Specific Website
+You can run test commands directly from the **Project Root** or from inside the **`hawk-search-sanity/`** folder.
+
+### 🧪 Staging Instance Commands (`https://staging.buyautopartsnow.com/`)
+
+| Test Scope | Headed Mode (Watch Live Browser) | Fast Headless Mode |
+| :--- | :--- | :--- |
+| **All 4 Staging Flows** | `npm run test:staging -- --headed` | `npm run test:staging` |
+| **1. Brand Search Only** | `npm run test:staging:brand -- --headed` | `npm run test:staging:brand` |
+| **2. Category Search Only** | `npm run test:staging:category -- --headed` | `npm run test:staging:category` |
+| **3. Keyword Search Only** | `npm run test:staging:keyword -- --headed` | `npm run test:staging:keyword` |
+| **4. Site Map Only** | `npm run test:staging:sitemap -- --headed` | `npm run test:staging:sitemap` |
+
+---
+
+### 🏢 Production Platform Commands (5 Live Websites)
+
+| Website / Platform | Headed Mode (Watch Live Browser) | Fast Headless Mode |
+| :--- | :--- | :--- |
+| **All 5 Production Sites** | `npm test -- --headed` | `npm test` |
+| **ABC Auto** | `npm run test:abcauto -- --headed` | `npm run test:abcauto` |
+| **Bumper to Bumper** | `npm run test:bumper -- --headed` | `npm run test:bumper` |
+| **Auto Value Stores** | `npm run test:autovalue -- --headed` | `npm run test:autovalue` |
+| **Arnold Motors** | `npm run test:arnold -- --headed` | `npm run test:arnold` |
+| **shop.eapw** | `npm run test:eapw -- --headed` | `npm run test:eapw` |
+
+---
+
+### 🔍 Production Flow-Specific Commands (Across All 5 Sites)
+
 ```bash
-# ABC Auto
-npm run test:abcauto
-
-# shop.eapw
-npm run test:eapw
-
-# Bumper to Bumper
-npm run test:bumper
-
-# Auto Value Stores
-npm run test:autovalue
-
-# Arnold Motors
-npm run test:arnold
-
-# 🧪 Run Staging Instance (Buy Auto Parts Now)
-npm run test:staging
-```
-
-### Run Staging by Specific Flow
-```bash
-# Staging Brand Search only
-npm run test:staging:brand
-
-# Staging Category Search only
-npm run test:staging:category
-
-# Staging Keyword Search only
-npm run test:staging:keyword
-
-# Staging Site Map Search only
-npm run test:staging:sitemap
-```
-
-### Run by Specific Test Flow
-```bash
-# Brand Search only (all sites)
+# Run Brand Search only on all production sites
 npm run test:brand
 
-# Category Search only (all sites)
+# Run Category & Subcategory Search only on all production sites
 npm run test:category
 
-# Keyword Search only (all sites)
+# Run Keyword Search ("Cleaner") only on all production sites
 npm run test:keyword
 
-# Site Map Search only (all sites)
+# Run Site Map Deep Navigation only on all production sites
 npm run test:sitemap
 ```
 
-### Run All 5 Sites
-```bash
-# Headless mode
-npm test
+---
 
-# Headed mode (watch browser live)
-npm run test:headed
-```
+### 📊 Open Executive Test Dashboard
 
-### Open the Executive Dashboard
+The dashboard opens **automatically** as soon as any test finishes. You can also manually reopen it anytime:
+
 ```bash
 npm run test:dashboard
+# or
+npm run test:report
 ```
 
 ---
 
 ## 📁 9. Project Directory Structure
 
-```
-Production Sanity Test Scripts/
-├── playwright.config.js               # Playwright configuration (workers, browsers, reporters)
-├── package.json                       # NPM scripts and project dependencies
-├── README.md                          # Quick start guide
-├── HAWK_SEARCH_TEST_SUITE_DOCUMENTATION.md # Full technical & architecture documentation
-├── reports/
-│   ├── hawk-search-dashboard.html     # Custom Executive Test Dashboard
-│   ├── summary.md                     # Markdown summary for Jira / Slack
-│   └── summary.json                   # Structured JSON results data
-└── tests/
-    ├── config/
-    │   └── testConfig.js              # Multi-site definitions, categories & URLs
-    ├── helpers/
-    │   ├── navigationHelper.js        # Random selection, string cleaning, name matching
-    │   └── reportHelper.js            # Summary attachment formatter
-    ├── pages/                         # Page Object Model (POM) classes
-    │   ├── BasePage.js                # Core navigation, SPA hydration, non-blank checks
-    │   ├── HomePage.js                # Homepage actions, consent popup dismissal
-    │   ├── BrandsPage.js              # ShopAllBrands directory extraction
-    │   ├── BrandResultsPage.js        # Brand product results validation
-    │   ├── CategoryPage.js            # Category landing & subcategory extraction
-    │   ├── SubcategoryPage.js         # Subcategory landing & item count assertions
-    │   ├── SearchPage.js              # Keyword search execution & result validation
-    │   └── SitemapPage.js             # Sitemap link extraction & destination checks
-    ├── reporters/
-    │   └── executiveDashboardReporter.js # Custom HTML executive dashboard generator
-    └── specs/
-        └── hawk-search.spec.js        # Single consolidated master test suite
+```text
+aapa-test-scripts/
+├── README.md                          # Repository overview & quick start
+├── package.json                       # Root script shortcuts routing to modules
+├── playwright.config.js               # Multi-folder Playwright configuration
+│
+├── 🦅 hawk-search-sanity/            # Dedicated Hawk Search Test Suite
+│   ├── playwright.config.js           # Dedicated Playwright configuration
+│   ├── package.json                   # Self-contained dependencies & NPM scripts
+│   ├── HAWK_SEARCH_TEST_SUITE_DOCUMENTATION.md # Architecture & error handling docs
+│   ├── reports/
+│   │   ├── hawk-search-dashboard.html # Custom Executive HTML Dashboard
+│   │   ├── summary.md                 # Markdown summary for Slack / Jira
+│   │   └── summary.json               # Structured test result metrics
+│   └── tests/
+│       ├── config/
+│       │   └── testConfig.js          # Multi-site definitions, categories & URLs
+│       ├── helpers/
+│       │   ├── navigationHelper.js    # Random selection & string sanitization
+│       │   └── reportHelper.js        # Summary attachment helpers
+│       ├── pages/                     # Page Object Models (POM)
+│       │   ├── BasePage.js            # Error screen detection & DOM hydration
+│       │   ├── HomePage.js            # Homepage actions & consent popup dismissal
+│       │   ├── BrandsPage.js          # Brand directory extraction
+│       │   ├── BrandResultsPage.js    # Brand product assertions
+│       │   ├── CategoryPage.js        # Category landing & subcategory extraction
+│       │   ├── SubcategoryPage.js     # Subcategory landing & item count checks
+│       │   ├── SearchPage.js          # Keyword search execution & validation
+│       │   └── SitemapPage.js         # Sitemap collection & deep landing checks
+│       ├── reporters/
+│       │   └── executiveDashboardReporter.js # Auto-opening interactive HTML dashboard
+│       └── specs/
+│           ├── hawk-search.spec.js    # Production suite (5 live platforms)
+│           └── hawk-search-staging.spec.js # Staging suite (Buy Auto Parts Now)
+│
+└── 🔄 prod-asg-refresh/              # Dedicated ASG Refresh Validation Suite
+    ├── scripts/
+    │   └── Validate-Prod-ASG-Refresh.js
+    ├── tests/
+    │   └── Validate-Prod-ASG-Refresh.spec.js
+    └── docs/
+        └── Production_ASG_Refresh_doc.md
 ```
