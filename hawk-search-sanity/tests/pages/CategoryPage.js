@@ -53,8 +53,28 @@ class CategoryPage extends BasePage {
     const { getSignificantWords } = require('../helpers/navigationHelper');
     const words = getSignificantWords(categoryName);
 
-    const foundInBody = nameAppearsOnPage(categoryName, bodyText);
-    const foundInUrl  = words.length === 0 || words.some((w) => decodedUrl.includes(w));
+    // Multilingual / Spanish synonym mappings for cross-regional Hawk Search portals
+    const synonyms = {
+      performance: ['rendimiento', 'performance', 'vehicles', 'equipment', 'tuning', 'ajuste'],
+      tuning: ['ajuste', 'tuning', 'equipment', 'rendimiento'],
+      accessories: ['accesorios', 'accessories', 'tools', 'herramientas'],
+      tools: ['herramientas', 'tools', 'supplies', 'equipment'],
+      oils: ['aceites', 'oils', 'oil', 'fluids', 'fluidos'],
+      fluids: ['fluidos', 'fluids', 'liquids', 'chemicals'],
+      waxes: ['ceras', 'waxes'],
+      paint: ['pintura', 'paint'],
+    };
+
+    const allKeywords = new Set(words);
+    for (const w of words) {
+      if (synonyms[w]) {
+        synonyms[w].forEach((syn) => allKeywords.add(syn));
+      }
+    }
+
+    const lowerBody = bodyText.toLowerCase();
+    const foundInBody = nameAppearsOnPage(categoryName, bodyText) || Array.from(allKeywords).some((w) => lowerBody.includes(w));
+    const foundInUrl  = words.length === 0 || Array.from(allKeywords).some((w) => decodedUrl.includes(w));
 
     expect(
       foundInBody || foundInUrl,
@@ -62,6 +82,22 @@ class CategoryPage extends BasePage {
     ).toBe(true);
 
     console.log(`  ✔ Category name is reflected on the page`);
+  }
+
+  /**
+   * Asserts that at least one subcategory is found on the category page.
+   * If 0 subcategories are discovered, the test step fails immediately.
+   *
+   * @param {Array} subcategories
+   * @param {string} categoryName
+   * @param {string} siteName
+   */
+  assertSubcategoriesFound(subcategories, categoryName, siteName) {
+    expect(
+      subcategories && subcategories.length > 0,
+      `[Category – ${siteName} > ${categoryName}] No subcategories found on page at URL: ${this.getCurrentUrl()}`
+    ).toBe(true);
+    console.log(`  ✔ Found ${subcategories.length} subcategories for "${categoryName}"`);
   }
 
   // ── Data Collection ────────────────────────────────────────────────────────

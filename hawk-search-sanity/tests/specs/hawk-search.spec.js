@@ -4,12 +4,21 @@
 // Hawk Search Master Sanity Suite (Multi-Site with Rich Reporting)
 //
 // Purpose : Single master spec file that runs all Hawk Search sanity flows
-//           across all 5 configured production websites:
+//           across all 14 configured production websites:
 //           1. ABC Auto (https://abcauto.com/)
 //           2. shop.eapw (https://shop.eapw.com/)
 //           3. Bumper to Bumper (https://shopbumpertobumper.com/)
 //           4. Auto Value Stores (https://autovaluestores.com/)
 //           5. Arnold Motors (https://arnoldmotorsupply.com/)
+//           6. My Auto Value Store (https://myautovaluestore.com/)
+//           7. Monument Car Parts (https://www.monumentcarparts.com/)
+//           8. Store Auto Value Parts Canada (https://store.autovalueparts.ca/)
+//           9. Maslack (https://shopmaslack.com/)
+//           10. Baxter Auto Parts (https://baxterautoparts.com/)
+//           11. B2B Kansas (https://b2bkansas.com/)
+//           12. Piston Ring Service (https://shop.pistonringservice.com/)
+//           13. Centro Piezas Plus (Staging) (https://staging.centropiezasplus.com/)
+//           14. Arnold Oil (A-Line) (https://www.alineauto.com/)
 //
 // Test Flows executed per site:
 //   1. Brand Search & Navigation (all brands → random brand → product results)
@@ -150,17 +159,7 @@ for (const site of targetSites) {
             await categoryPage.assertCategoryNameVisible(category.name);
 
             const subcategories = await categoryPage.getSubcategoryLinks(category.url);
-
-            if (subcategories.length === 0) {
-              console.log(`  ⚠ No subcategories found – moving to next category\n`);
-              categoryReportResults.push({
-                category: category.name,
-                subcategory: 'None (0 found)',
-                url: category.url,
-                itemsCount: 0,
-              });
-              return;
-            }
+            categoryPage.assertSubcategoriesFound(subcategories, category.name, site.name);
 
             const selectedSubs = pickRandom(subcategories, SUBCATEGORIES_TO_TEST);
             console.log(`\n  ✔ Randomly selected subcategories:`);

@@ -6,7 +6,7 @@
 
 The **Hawk Search Sanity Test Automation Suite** is an enterprise-grade automated testing framework built using **Playwright**. 
 
-Its primary purpose is to perform fast, reliable, and continuous sanity checks on **5 live production auto parts e-commerce platforms** that share the Hawk Search architecture. It validates that the core search and navigation experiences are functioning correctly, returning non-blank pages, accurate product counts, and valid links.
+Its primary purpose is to perform fast, reliable, and continuous sanity checks on **14 live production auto parts e-commerce platforms** that share the Hawk Search architecture. It validates that the core search and navigation experiences are functioning correctly, returning non-blank pages, accurate product counts, and valid links.
 
 ---
 
@@ -22,15 +22,24 @@ Its primary purpose is to perform fast, reliable, and continuous sanity checks o
 
 ## 🏢 3. Supported Websites & Categories
 
-The suite tests **5 distinct production websites** using a centralized configuration ([testConfig.js](tests/config/testConfig.js)):
+The suite tests **14 distinct production websites** using a centralized configuration ([testConfig.js](tests/config/testConfig.js)):
 
 | # | Website Name | Base URL | Configured Top-Level Categories |
 | :-: | :--- | :--- | :--- |
 | **1** | **ABC Auto** | `https://abcauto.com/` | • Accessories<br>• Vehicles, Equipment, Tools, and Supplies<br>• Oil, Fluids and Chemicals<br>• Garage and Shop Products |
 | **2** | **shop.eapw** | `https://shop.eapw.com/` | • Vehicles, Equipment, Tools, and Supplies<br>• Oil, Fluids and Chemicals |
 | **3** | **Bumper to Bumper** | `https://shopbumpertobumper.com/` | • Vehicles, Equipment, Tools, and Supplies<br>• Accessories<br>• Oil, Fluids and Chemicals<br>• Household, Shop and Office Products |
-| **4** | **Auto Value Stores** | `https://autovaluestores.com/` | • Oils, Fluids, Waxes & Paint<br>• Accessories<br>• Tools & Shop Supplies<br>• Ag & Heavy Duty Parts |
+| **4** | **Auto Value Stores** | `https://autovaluestores.com/` | • Oils, Fluids, Waxes & Paint<br>• Accessories<br>• Tools & Shop Supplies |
 | **5** | **Arnold Motors** | `https://arnoldmotorsupply.com/` | • Equipment, Tools & Supplies<br>• Accessories<br>• OILS & FLUIDS<br>• Specialty |
+| **6** | **My Auto Value Store** | `https://myautovaluestore.com/` | • Vehicles, Equipment, Tools, and Supplies<br>• Accessories<br>• Oil, Fluids and Chemicals<br>• Household, Shop and Office Products |
+| **7** | **Monument Car Parts** | `https://www.monumentcarparts.com/` | • Vehicles, Equipment, Tools, and Supplies<br>• Accessories<br>• Oil, Fluids and Chemicals<br>• Household, Shop and Office Products |
+| **8** | **Store Auto Value Parts Canada** | `https://store.autovalueparts.ca/` | • Vehicles, Equipment, Tools, and Supplies<br>• Accessories<br>• Oil, Fluids and Chemicals<br>• Household, Shop and Office Products |
+| **9** | **Maslack** | `https://shopmaslack.com/` | • Vehicles, Equipment, Tools, and Supplies<br>• Accessories<br>• Oil, Fluids and Chemicals<br>• Household, Shop and Office Products |
+| **10** | **Baxter Auto Parts** | `https://baxterautoparts.com/` | • Vehicles, Equipment, Tools, and Supplies<br>• Accessories<br>• Oil, Fluids and Chemicals |
+| **11** | **B2B Kansas** | `https://b2bkansas.com/` | • Shop by Category<br>• Oil, Fluids and Chemicals<br>• Accessories |
+| **12** | **Piston Ring Service** | `https://shop.pistonringservice.com/` | • Vehicles, Equipment, Tools, and Supplies<br>• Accessories<br>• Oil, Fluids and Chemicals<br>• Household, Shop and Office Products |
+| **13** | **Centro Piezas Plus (Staging)** | `https://staging.centropiezasplus.com/` | • Performance y tuning<br>• Accessories and tools<br>• Oils, Fluids, Waxes and Paint |
+| **14** | **Arnold Oil (A-Line)** | `https://www.alineauto.com/` | • Equipment, Tools, and Supplies<br>• Oil, Fluids, and Chemicals<br>• Accessories |
 
 ### 🧪 Staging Environment Spec ([hawk-search-staging.spec.js](tests/specs/hawk-search-staging.spec.js))
 | # | Environment | Base URL | Configured Categories |
@@ -166,43 +175,86 @@ You can run test commands directly from the **Project Root** or from inside the 
 
 ### 🧪 Staging Instance Commands (`https://staging.buyautopartsnow.com/`)
 
+#### 📍 If running from Project Root:
+
 | Test Scope | Headed Mode (Watch Live Browser) | Fast Headless Mode |
 | :--- | :--- | :--- |
-| **All 4 Staging Flows** | `npm run test:staging -- --headed` | `npm run test:staging` |
-| **1. Brand Search Only** | `npm run test:staging:brand -- --headed` | `npm run test:staging:brand` |
-| **2. Category Search Only** | `npm run test:staging:category -- --headed` | `npm run test:staging:category` |
-| **3. Keyword Search Only** | `npm run test:staging:keyword -- --headed` | `npm run test:staging:keyword` |
-| **4. Site Map Only** | `npm run test:staging:sitemap -- --headed` | `npm run test:staging:sitemap` |
+| **All 4 Staging Flows** | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **1. Brand Search Only** | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Brand Search" --headed` | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Brand Search"` |
+| **2. Category Search Only** | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Category Search" --headed` | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Category Search"` |
+| **3. Keyword Search Only** | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Keyword Search" --headed` | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Keyword Search"` |
+| **4. Site Map Only** | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Site Map Search" --headed` | `npx playwright test hawk-search-sanity/tests/specs/hawk-search-staging.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Site Map Search"` |
+
+#### 📍 If running from inside `hawk-search-sanity/`:
+
+| Test Scope | Headed Mode (Watch Live Browser) | Fast Headless Mode |
+| :--- | :--- | :--- |
+| **All 4 Staging Flows** | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium --headed` | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium` |
+| **1. Brand Search Only** | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g "Brand Search" --headed` | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g "Brand Search"` |
+| **2. Category Search Only** | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g "Category Search" --headed` | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g "Category Search"` |
+| **3. Keyword Search Only** | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g "Keyword Search" --headed` | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g "Keyword Search"` |
+| **4. Site Map Only** | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g "Site Map Search" --headed` | `npx playwright test tests/specs/hawk-search-staging.spec.js --project=chromium -g "Site Map Search"` |
 
 ---
 
-### 🏢 Production Platform Commands (5 Live Websites)
+### 🏢 Production Platform Commands (14 Live Websites)
+
+#### 📍 If running from Project Root:
 
 | Website / Platform | Headed Mode (Watch Live Browser) | Fast Headless Mode |
 | :--- | :--- | :--- |
-| **All 5 Production Sites** | `npm test -- --headed` | `npm test` |
-| **ABC Auto** | `npm run test:abcauto -- --headed` | `npm run test:abcauto` |
-| **Bumper to Bumper** | `npm run test:bumper -- --headed` | `npm run test:bumper` |
-| **Auto Value Stores** | `npm run test:autovalue -- --headed` | `npm run test:autovalue` |
-| **Arnold Motors** | `npm run test:arnold -- --headed` | `npm run test:arnold` |
-| **shop.eapw** | `npm run test:eapw -- --headed` | `npm run test:eapw` |
+| **All 14 Production Sites** | `npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **ABC Auto** | `SITE=abcauto npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=abcauto npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **shop.eapw** | `SITE=eapw npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=eapw npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Bumper to Bumper** | `SITE=bumpertobumper npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=bumpertobumper npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Auto Value Stores** | `SITE=autovalue npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=autovalue npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Arnold Motors** | `SITE=arnoldmotors npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=arnoldmotors npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **My Auto Value Store** | `SITE=myautovalue npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=myautovalue npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Monument Car Parts** | `SITE=monumentcarparts npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=monumentcarparts npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Store Auto Value Canada** | `SITE=storeautovalue npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=storeautovalue npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Maslack** | `SITE=maslack npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=maslack npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Baxter Auto Parts** | `SITE=baxter npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=baxter npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **B2B Kansas** | `SITE=b2bkansas npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=b2bkansas npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Piston Ring Service** | `SITE=pistonring npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=pistonring npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Centro Piezas Plus (Staging)** | `SITE=centropiaz npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=centropiaz npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+| **Arnold Oil (A-Line)** | `SITE=arnoldoil npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium --headed` | `SITE=arnoldoil npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium` |
+
+#### 📍 If running from inside `hawk-search-sanity/`:
+
+| Website / Platform | Headed Mode (Watch Live Browser) | Fast Headless Mode |
+| :--- | :--- | :--- |
+| **All 14 Production Sites** | `npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **ABC Auto** | `SITE=abcauto npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=abcauto npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **shop.eapw** | `SITE=eapw npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=eapw npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Bumper to Bumper** | `SITE=bumpertobumper npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=bumpertobumper npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Auto Value Stores** | `SITE=autovalue npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=autovalue npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Arnold Motors** | `SITE=arnoldmotors npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=arnoldmotors npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **My Auto Value Store** | `SITE=myautovalue npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=myautovalue npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Monument Car Parts** | `SITE=monumentcarparts npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=monumentcarparts npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Store Auto Value Canada** | `SITE=storeautovalue npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=storeautovalue npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Maslack** | `SITE=maslack npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=maslack npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Baxter Auto Parts** | `SITE=baxter npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=baxter npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **B2B Kansas** | `SITE=b2bkansas npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=b2bkansas npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Piston Ring Service** | `SITE=pistonring npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=pistonring npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Centro Piezas Plus (Staging)** | `SITE=centropiaz npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=centropiaz npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
+| **Arnold Oil (A-Line)** | `SITE=arnoldoil npx playwright test tests/specs/hawk-search.spec.js --project=chromium --headed` | `SITE=arnoldoil npx playwright test tests/specs/hawk-search.spec.js --project=chromium` |
 
 ---
 
-### 🔍 Production Flow-Specific Commands (Across All 5 Sites)
+### 🔍 Production Flow-Specific Commands (Across All 14 Sites)
 
 ```bash
 # Run Brand Search only on all production sites
-npm run test:brand
+npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Brand Search"
 
 # Run Category & Subcategory Search only on all production sites
-npm run test:category
+npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Category Search"
 
 # Run Keyword Search ("Cleaner") only on all production sites
-npm run test:keyword
+npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Keyword Search"
 
 # Run Site Map Deep Navigation only on all production sites
-npm run test:sitemap
+npx playwright test hawk-search-sanity/tests/specs/hawk-search.spec.js --config=hawk-search-sanity/playwright.config.js --project=chromium -g "Site Map Search"
 ```
 
 ---
@@ -253,7 +305,7 @@ aapa-test-scripts/
 │       ├── reporters/
 │       │   └── executiveDashboardReporter.js # Auto-opening interactive HTML dashboard
 │       └── specs/
-│           ├── hawk-search.spec.js    # Production suite (5 live platforms)
+│           ├── hawk-search.spec.js    # Production suite (14 live platforms)
 │           └── hawk-search-staging.spec.js # Staging suite (Buy Auto Parts Now)
 │
 └── 🔄 prod-asg-refresh/              # Dedicated ASG Refresh Validation Suite

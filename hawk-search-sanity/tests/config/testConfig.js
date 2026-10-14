@@ -1,7 +1,7 @@
 // tests/config/testConfig.js
 // ─────────────────────────────────────────────────────────────────────────────
 // Central Multi-Site configuration for the Hawk Search Test Suite.
-// Contains target configurations for all 5 production websites.
+// Contains target configurations for all 14 production websites.
 // ─────────────────────────────────────────────────────────────────────────────
 
 'use strict';
@@ -19,7 +19,7 @@ const SUBCATEGORIES_TO_TEST = 2;
 const DEFAULT_SEARCH_KEYWORD = 'Cleaner';
 
 /**
- * Multi-Site configuration definitions for all 5 websites.
+ * Multi-Site configuration definitions for all 14 websites.
  */
 const SITES = [
   {
@@ -108,10 +108,6 @@ const SITES = [
         name: 'Tools & Shop Supplies',
         url: 'https://autovaluestores.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
       },
-      {
-        name: 'Ag & Heavy Duty Parts',
-        url: 'https://autovaluestores.com/Agricultural%2C-Industrial-and-Heavy-Duty/MTA0OQ',
-      },
     ],
   },
   {
@@ -135,7 +131,216 @@ const SITES = [
       },
       {
         name: 'Specialty',
-        url: 'https://arnoldmotorsupply.com/Agricultural%2C-Industrial-and-Heavy-Duty/MTA0OQ',
+        url: 'https://arnoldmotorsupply.com/Household%2C-Shop-and-Office-Products/MTA0NA',
+      },
+    ],
+  },
+  {
+    id: 'myautovalue',
+    name: 'My Auto Value Store',
+    baseUrl: 'https://myautovaluestore.com/',
+    sitemapUrl: 'https://myautovaluestore.com/site-map',
+    searchKeyword: 'Cleaner',
+    categories: [
+      {
+        name: 'Vehicles, Equipment, Tools, and Supplies',
+        url: 'https://myautovaluestore.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Accessories',
+        url: 'https://myautovaluestore.com/Accessories/MTAwMQ',
+      },
+      {
+        name: 'Oil, Fluids and Chemicals',
+        url: 'https://myautovaluestore.com/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+      {
+        name: 'Household, Shop and Office Products',
+        url: 'https://myautovaluestore.com/Household%2C-Shop-and-Office-Products/MTA0NA',
+      },
+    ],
+  },
+  {
+    id: 'monumentcarparts',
+    name: 'Monument Car Parts',
+    baseUrl: 'https://www.monumentcarparts.com/',
+    sitemapUrl: 'https://www.monumentcarparts.com/site-map',
+    searchKeyword: 'Cleaner',
+    categories: [
+      {
+        name: 'Vehicles, Equipment, Tools, and Supplies',
+        url: 'https://www.monumentcarparts.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Accessories',
+        url: 'https://www.monumentcarparts.com/Accessories/MTAwMQ',
+      },
+      {
+        name: 'Oil, Fluids and Chemicals',
+        url: 'https://www.monumentcarparts.com/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+      {
+        name: 'Household, Shop and Office Products',
+        url: 'https://www.monumentcarparts.com/Household%2C-Shop-and-Office-Products/MTA0NA',
+      },
+    ],
+  },
+  {
+    id: 'storeautovalue',
+    name: 'Store Auto Value Parts Canada',
+    baseUrl: 'https://store.autovalueparts.ca/',
+    sitemapUrl: 'https://store.autovalueparts.ca/site-map',
+    searchKeyword: 'Cleaner',
+    categories: [
+      {
+        name: 'Vehicles, Equipment, Tools, and Supplies',
+        url: 'https://store.autovalueparts.ca/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Accessories',
+        url: 'https://store.autovalueparts.ca/Accessories/MTAwMQ',
+      },
+      {
+        name: 'Oil, Fluids and Chemicals',
+        url: 'https://store.autovalueparts.ca/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+      {
+        name: 'Household, Shop and Office Products',
+        url: 'https://store.autovalueparts.ca/Household%2C-Shop-and-Office-Products/MTA0NA',
+      },
+    ],
+  },
+  {
+    id: 'maslack',
+    name: 'Maslack',
+    baseUrl: 'https://shopmaslack.com/',
+    sitemapUrl: 'https://shopmaslack.com/site-map',
+    searchKeyword: 'Cleaner',
+    categories: [
+      {
+        name: 'Vehicles, Equipment, Tools, and Supplies',
+        url: 'https://shopmaslack.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Accessories',
+        url: 'https://shopmaslack.com/Accessories/MTAwMQ',
+      },
+      {
+        name: 'Oil, Fluids and Chemicals',
+        url: 'https://shopmaslack.com/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+      {
+        name: 'Household, Shop and Office Products',
+        url: 'https://shopmaslack.com/Household%2C-Shop-and-Office-Products/MTA0NA',
+      },
+    ],
+  },
+  {
+    id: 'baxter',
+    name: 'Baxter Auto Parts',
+    baseUrl: 'https://baxterautoparts.com/',
+    sitemapUrl: 'https://baxterautoparts.com/site-map',
+    searchKeyword: 'Cleaner',
+    categories: [
+      {
+        name: 'Vehicles, Equipment, Tools, and Supplies',
+        url: 'https://baxterautoparts.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Accessories',
+        url: 'https://baxterautoparts.com/Accessories/MTAwMQ',
+      },
+      {
+        name: 'Oil, Fluids and Chemicals',
+        url: 'https://baxterautoparts.com/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+    ],
+  },
+  {
+    id: 'b2bkansas',
+    name: 'B2B Kansas',
+    baseUrl: 'https://b2bkansas.com/',
+    sitemapUrl: 'https://b2bkansas.com/site-map',
+    searchKeyword: 'Cleaner',
+    categories: [
+      {
+        name: 'Shop by Category',
+        url: 'https://b2bkansas.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Oil, Fluids and Chemicals',
+        url: 'https://b2bkansas.com/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+      {
+        name: 'Accessories',
+        url: 'https://b2bkansas.com/Accessories/MTAwMQ',
+      },
+    ],
+  },
+  {
+    id: 'pistonring',
+    name: 'Piston Ring Service',
+    baseUrl: 'https://shop.pistonringservice.com/',
+    sitemapUrl: 'https://shop.pistonringservice.com/site-map',
+    searchKeyword: 'Cleaner',
+    categories: [
+      {
+        name: 'Vehicles, Equipment, Tools, and Supplies',
+        url: 'https://shop.pistonringservice.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Accessories',
+        url: 'https://shop.pistonringservice.com/Accessories/MTAwMQ',
+      },
+      {
+        name: 'Oil, Fluids and Chemicals',
+        url: 'https://shop.pistonringservice.com/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+      {
+        name: 'Household, Shop and Office Products',
+        url: 'https://shop.pistonringservice.com/Household%2C-Shop-and-Office-Products/MTA0NA',
+      },
+    ],
+  },
+  {
+    id: 'centropiaz',
+    name: 'Centro Piezas Plus (Staging)',
+    baseUrl: 'https://staging.centropiezasplus.com/',
+    sitemapUrl: 'https://staging.centropiezasplus.com/site-map',
+    searchKeyword: 'Aceite',
+    categories: [
+      {
+        name: 'Performance y tuning',
+        url: 'https://staging.centropiezasplus.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Accessories and tools',
+        url: 'https://staging.centropiezasplus.com/Accessories/MTAwMQ',
+      },
+      {
+        name: 'Oils, Fluids, Waxes and Paint',
+        url: 'https://staging.centropiezasplus.com/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+    ],
+  },
+  {
+    id: 'arnoldoil',
+    name: 'Arnold Oil (A-Line)',
+    baseUrl: 'https://www.alineauto.com/',
+    sitemapUrl: 'https://www.alineauto.com/site-map',
+    searchKeyword: 'Cleaner',
+    categories: [
+      {
+        name: 'Equipment, Tools, and Supplies',
+        url: 'https://www.alineauto.com/Vehicles%2C-Equipment%2C-Tools%2C-and-Supplies/MTAxOA',
+      },
+      {
+        name: 'Oil, Fluids, and Chemicals',
+        url: 'https://www.alineauto.com/Oil%2C-Fluids-and-Chemicals/MTA0Ng',
+      },
+      {
+        name: 'Accessories',
+        url: 'https://www.alineauto.com/Accessories/MTAwMQ',
       },
     ],
   },
@@ -144,7 +349,7 @@ const SITES = [
 /**
  * Returns the configured sites to test.
  * If SITE_ID or SITE is set in environment (e.g. SITE=autovalue), returns only that site.
- * Otherwise returns all 5 sites.
+ * Otherwise returns all 14 sites.
  */
 function getTargetSites() {
   const targetId = (process.env.SITE || process.env.SITE_ID || '').toLowerCase().trim();

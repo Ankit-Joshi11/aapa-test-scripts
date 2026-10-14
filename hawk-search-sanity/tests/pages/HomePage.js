@@ -21,8 +21,7 @@ class HomePage extends BasePage {
     super(page);
 
     // ── Locators ──────────────────────────────────────────────────────────────
-    // Top navigation links
-    this.brandsNavLink     = page.locator('a[href*="ShopAllBrands"], a[href*="Brands"], a:has-text("Brands")');
+    this.brandsNavLink     = page.locator('a[href*="ShopAllBrands"], a[href*="Brands"], a:has-text("Brands"), a:has-text("Marcas")');
     this.accessoriesLink   = page.locator('a[href*="Accessories"], a:has-text("Accessories")');
     this.vehiclesLink      = page.locator('a[href*="Vehicles"], a:has-text("Vehicles")');
     this.oilFluidsLink     = page.locator('a[href*="Oil"], a:has-text("Oil, Fluids")');

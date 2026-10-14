@@ -147,17 +147,7 @@ test.describe(`Hawk Search - Staging: ${site.name} (${site.baseUrl})`, () => {
           await categoryPage.assertCategoryNameVisible(category.name);
 
           const subcategories = await categoryPage.getSubcategoryLinks(category.url);
-
-          if (subcategories.length === 0) {
-            console.log(`  ⚠ No subcategories found – moving to next category\n`);
-            categoryReportResults.push({
-              category: category.name,
-              subcategory: 'None (0 found)',
-              url: category.url,
-              itemsCount: 0,
-            });
-            return;
-          }
+          categoryPage.assertSubcategoriesFound(subcategories, category.name, site.name);
 
           const selectedSubs = pickRandom(subcategories, SUBCATEGORIES_TO_TEST);
           console.log(`\n  ✔ Randomly selected subcategories:`);

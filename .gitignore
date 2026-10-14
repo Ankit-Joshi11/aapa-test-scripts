@@ -6,6 +6,8 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+reports/
+hawk-search-sanity/reports/
 
 # macOS
 .DS_Store
